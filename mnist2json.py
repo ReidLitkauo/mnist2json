@@ -46,8 +46,8 @@ def mnist2json(flabel, fimage, fout):
 		# and ends with another quote.
 		# So I slice those suckers out.
 		images.append({
-			'label': int.from_bytes(flabel.read(1), 'big'),
-			'image': str(binascii.hexlify(fimage.read(rows*cols)))[2:-1],
+			'output': int.from_bytes(flabel.read(1), 'big'),
+			'input':  [round(int.from_bytes(fimage.read(1), 'big') / 255.0, 3) for i in range(rows*cols)],
 		})
 
 	# Write to desired output file
